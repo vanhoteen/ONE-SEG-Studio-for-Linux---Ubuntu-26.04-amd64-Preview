@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ONE SEG Studio
+Comment=Prepare One-Seg video and control HackRF transmission
+Comment[es]=Prepara vídeo One-Seg y controla la transmisión con HackRF
+Exec=one-seg-studio
+Icon=one-seg-studio
+Terminal=false
+Categories=AudioVideo;Video;
+StartupNotify=true

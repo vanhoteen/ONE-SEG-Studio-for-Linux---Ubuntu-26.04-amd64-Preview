@@ -1,0 +1,1 @@
+<tsduck><SDT transport_stream_id="0x7FF0" original_network_id="0x7FF0"><service service_id="0x0608" running_status="running"><service_descriptor service_type="0xC0" service_provider_name="Prueba" service_name="CanalPlus"/></service></SDT></tsduck>
