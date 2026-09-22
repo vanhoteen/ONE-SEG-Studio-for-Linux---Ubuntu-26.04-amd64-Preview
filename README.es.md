@@ -16,6 +16,12 @@
 
 Proyecto creado por **vanhoteen** para preparar vídeo y generar una señal de televisión japonesa One-Seg con un HackRF One. En la configuración habitual de ISDB-T, uno de los trece segmentos —el central— lleva televisión de menor resolución para pequeños receptores, sin Internet.
 
+## Interfaz
+
+ONE SEG Studio para Linux incluye interfaz en **castellano e inglés**. El selector cambia toda la aplicación, incluidos la preparación, la detección del HackRF, los controles de emisión y los mensajes de estado.
+
+![ONE SEG Studio para Linux — interfaz en castellano](Assets/linux-preview.png)
+
 ## Prueba realizada
 
 El autor ha compilado e instalado esta versión en Ubuntu 26.04 amd64 y ha confirmado la recepción en una Sony XDV-D500. También han pasado las comprobaciones de preparación de vídeo H.264 320×240, audio AAC y paquetes TS, sin errores de continuidad. Esto no constituye una certificación de la norma ni garantiza todos los receptores.

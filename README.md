@@ -16,6 +16,12 @@
 
 Created by **vanhoteen**, ONE SEG Studio prepares video and generates a Japanese One-Seg television signal using a HackRF One. In the usual Japanese ISDB-T configuration, the central one of thirteen segments carries a lower-resolution service for portable receivers, without Internet reception.
 
+## Interface
+
+ONE SEG Studio for Linux includes a **Spanish and English** interface. The language selector changes the complete application interface, including preparation, HackRF detection, transmission controls and status messages.
+
+![ONE SEG Studio for Linux — Spanish interface](Assets/linux-preview.png)
+
 ## What has been tested?
 
 The author successfully compiled and installed this Linux preview on Ubuntu 26.04 amd64 and confirmed reception on a Sony XDV-D500. The preparation test also passed H.264 320×240 video, AAC audio and TS packet-alignment checks, reporting zero continuity errors. This is a successful user test, not certification of compliance or a guarantee for every receiver.
