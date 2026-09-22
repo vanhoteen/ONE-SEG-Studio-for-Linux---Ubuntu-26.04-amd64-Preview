@@ -44,7 +44,7 @@ Open **ONE SEG Studio** from the desktop applications menu. A graphical desktop 
 4. Click **Prepare video** and wait.
 5. **Transmit** starts RF; **Stop** ends it. Installation, checking tools and preparation do not start transmission.
 
-Video: 320×240 at 15 fps. Bitrates: 80, 100, 200 or 300 kb/s; AAC audio at 48 kb/s. The amplifier starts disabled and VGA gain defaults to zero. Changing settings requires preparing the video again.
+Video: 320×240 at 15 fps. Bitrates: 80, 100, 200 or 300 kb/s; AAC audio at 48 kb/s. The RF amplifier starts enabled and VGA gain defaults to 47 dB. Changing settings requires preparing the video again.
 
 ## Preview limitations
 

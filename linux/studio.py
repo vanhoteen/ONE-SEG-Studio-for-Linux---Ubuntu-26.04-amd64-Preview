@@ -75,8 +75,8 @@ class Studio:
         self.file = tk.StringVar()
         self.channel = tk.StringVar(value='20')
         self.rate = tk.StringVar(value='80')
-        self.gain = tk.StringVar(value='0')
-        self.amp = tk.BooleanVar(value=False)
+        self.gain = tk.StringVar(value='47')
+        self.amp = tk.BooleanVar(value=True)
         self.lang = 'es'
         self.language_choice = tk.StringVar(value='Español')
         self.device_detected = False

@@ -9,5 +9,5 @@ if [[ "${ID:-}" != ubuntu || "${VERSION_ID:-}" != "$EXPECTED" || "$(dpkg --print
 fi
 sha256sum --check SHA256SUMS
 sudo apt-get update
-sudo apt-get install --yes "./tsduck_3.45-4798.ubuntu${EXPECTED%%.*}_amd64.deb" ./one-seg-studio_0.1.0~linuxpreview3_amd64.deb
+sudo apt-get install --yes "./tsduck_3.45-4798.ubuntu${EXPECTED%%.*}_amd64.deb" ./one-seg-studio_0.1.0~linuxpreview4_amd64.deb
 echo 'Installed. Open ONE SEG Studio from the applications menu.'

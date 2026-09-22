@@ -44,7 +44,7 @@ Abre **ONE SEG Studio** desde el menú de aplicaciones del escritorio Linux. Una
 4. Pulsa **Prepare video** y espera.
 5. **Transmit** inicia RF y **Stop** la detiene. Instalar y preparar no transmite.
 
-Vídeo 320×240 a 15 fps; 80, 100, 200 o 300 kb/s; AAC a 48 kb/s. Amplificador desactivado y ganancia inicial cero. Cambiar parámetros exige preparar de nuevo.
+Vídeo 320×240 a 15 fps; 80, 100, 200 o 300 kb/s; AAC a 48 kb/s. El amplificador RF empieza activado y la ganancia VGA inicial es de 47 dB. Cambiar parámetros exige preparar de nuevo.
 
 ## Límites del modelo de pruebas
 
