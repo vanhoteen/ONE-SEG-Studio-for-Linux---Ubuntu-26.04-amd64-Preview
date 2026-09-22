@@ -48,7 +48,7 @@ Video: 320×240 at 15 fps. Bitrates: 80, 100, 200 or 300 kb/s; AAC audio at 48 k
 
 ## Preview limitations
 
-English-only Linux interface. Other distributions and architectures are unverified. Files are finite tests; seamless looping is not guaranteed. Camera/capture inputs and the integrated waveform display are not implemented. A legacy log message may mention a graph although this Linux interface has none. SI tables use a dated file snapshot. Work files live in `~/.local/share/one-seg-studio` by default.
+Spanish-language Linux interface. Other distributions and architectures are unverified. Files are finite tests; seamless looping is not guaranteed. Camera/capture inputs and the integrated waveform display are not implemented. A legacy log message may mention a graph although this Linux interface has none. SI tables use a dated file snapshot. Work files live in `~/.local/share/one-seg-studio` by default.
 
 ## RF responsibility
 

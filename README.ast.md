@@ -34,7 +34,7 @@ Conecta HackRF, pulsa **Check tools** y **Detect HackRF**, escueyi un vídeo y p
 
 ## Llendes y responsabilidá
 
-Interfaz namái n'inglés. Nun inclúi cámara nin gráfica integrada; nun garantiza un bucle continuu nin certificación de la norma. Comprueba les frecuencies, potencies y permisos del to país antes d'emitir. Un canal xaponés nun da autorización local. Evita interferencies; l'usuariu ye responsable de los permisos y del usu del equipu. Na midida permitida pola llei, l'autor nun asume responsabilidá por usos non autorizaos o interferencies causaes pol usuariu.
+Interfaz actualmente en castellanu. Nun inclúi cámara nin gráfica integrada; nun garantiza un bucle continuu nin certificación de la norma. Comprueba les frecuencies, potencies y permisos del to país antes d'emitir. Un canal xaponés nun da autorización local. Evita interferencies; l'usuariu ye responsable de los permisos y del usu del equipu. Na midida permitida pola llei, l'autor nun asume responsabilidá por usos non autorizaos o interferencies causaes pol usuariu.
 
 Más detalles na [guía en castellano](README.es.md), les [notes de compilación](linux/README.md) y les [licencies](LICENSE-NOTICE.md).
 

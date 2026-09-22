@@ -34,7 +34,7 @@ HackRF anschließen, **Check tools** und **Detect HackRF** wählen, Video auswä
 
 ## Grenzen und Verantwortung
 
-Die Linux-Oberfläche ist nur Englisch. Kameraeingang und integrierte Signalanzeige fehlen; unterbrechungslose Wiederholung ist nicht garantiert. Keine Normzertifizierung. Vor dem Senden örtliche Frequenz-, Leistungs- und Genehmigungsvorschriften prüfen. Eine japanische Kanalnummer ist keine örtliche Sendegenehmigung. Schädliche Störungen vermeiden; der Nutzer ist für Genehmigungen und Betrieb verantwortlich. Soweit gesetzlich zulässig, übernimmt der Autor keine Verantwortung für unbefugten Betrieb oder vom Nutzer verursachte Störungen.
+Die Linux-Oberfläche ist derzeit auf Spanisch. Kameraeingang und integrierte Signalanzeige fehlen; unterbrechungslose Wiederholung ist nicht garantiert. Keine Normzertifizierung. Vor dem Senden örtliche Frequenz-, Leistungs- und Genehmigungsvorschriften prüfen. Eine japanische Kanalnummer ist keine örtliche Sendegenehmigung. Schädliche Störungen vermeiden; der Nutzer ist für Genehmigungen und Betrieb verantwortlich. Soweit gesetzlich zulässig, übernimmt der Autor keine Verantwortung für unbefugten Betrieb oder vom Nutzer verursachte Störungen.
 
 Weitere Angaben: [englische Anleitung](README.md), [Build-Anleitung](linux/README.md), [Lizenzen](LICENSE-NOTICE.md).
 

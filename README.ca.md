@@ -34,7 +34,7 @@ Connecta el HackRF, prem **Check tools** i **Detect HackRF**, tria un vídeo i p
 
 ## Limitacions i responsabilitat
 
-Interfície Linux només en anglès. No inclou càmera ni gràfica integrada, i no garanteix un bucle continu ni certificació de la norma. Comprova les freqüències, potències i autoritzacions del teu país abans d'emetre. Un canal japonès no concedeix autorització local. Evita interferències; l'usuari és responsable dels permisos i de l'ús de l'equip. En la mesura permesa per la llei, l'autor no assumeix responsabilitat pels usos no autoritzats o les interferències causades per l'usuari.
+Interfície Linux actualment en castellà. No inclou càmera ni gràfica integrada, i no garanteix un bucle continu ni certificació de la norma. Comprova les freqüències, potències i autoritzacions del teu país abans d'emetre. Un canal japonès no concedeix autorització local. Evita interferències; l'usuari és responsable dels permisos i de l'ús de l'equip. En la mesura permesa per la llei, l'autor no assumeix responsabilitat pels usos no autoritzats o les interferències causades per l'usuari.
 
 Més detalls a la [guia en castellà](README.es.md), les [notes de compilació](linux/README.md) i les [llicències](LICENSE-NOTICE.md).
 
