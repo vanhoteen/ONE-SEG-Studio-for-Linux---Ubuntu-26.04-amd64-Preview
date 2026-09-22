@@ -30,7 +30,7 @@ The author successfully compiled and installed this Linux preview on Ubuntu 26.0
 
 [Open Releases — installer downloads](https://github.com/vanhoteen/ONE-SEG-Studio-for-Linux---Ubuntu-26.04-amd64-Preview/releases)
 
-The tested installer will be uploaded separately by the author. If no installer asset is listed yet, it has not been uploaded. GitHub's automatic **Source code** archives are for building, not the ready-to-install package.
+Download [**Onestudio_linux-ubuntu26-amd64-preview4-clean.zip** from release 0.2](https://github.com/vanhoteen/ONE-SEG-Studio-for-Linux---Ubuntu-26.04-amd64-Preview/releases/download/0.2/Onestudio_linux-ubuntu26-amd64-preview4-clean.zip). GitHub's automatic **Source code** archives are for building, not the ready-to-install package.
 
 Download and extract the **complete installer folder**. Keep both `.deb` packages, `INSTALL.sh`, `UBUNTU_VERSION` and `SHA256SUMS` together. Open a terminal in that folder and run:
 

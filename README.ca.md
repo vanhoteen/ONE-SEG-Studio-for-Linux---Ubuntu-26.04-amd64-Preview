@@ -20,7 +20,7 @@ L'autor ha provat la instal·lació i la recepció en una Sony XDV-D500 amb Ubun
 
 ## Instal·lació
 
-[Descàrregues de l'instal·lador](https://github.com/vanhoteen/ONE-SEG-Studio-for-Linux---Ubuntu-26.04-amd64-Preview/releases). L'autor pujarà el paquet provat per separat. Els fitxers automàtics **Source code** no són l'instal·lador.
+Descarrega [**Onestudio_linux-ubuntu26-amd64-preview4-clean.zip de la versió 0.2**](https://github.com/vanhoteen/ONE-SEG-Studio-for-Linux---Ubuntu-26.04-amd64-Preview/releases/download/0.2/Onestudio_linux-ubuntu26-amd64-preview4-clean.zip). Els fitxers automàtics **Source code** no són l'instal·lador.
 
 Descarrega i descomprimeix la carpeta completa. Mantén junts els dos `.deb`, `INSTALL.sh`, `UBUNTU_VERSION` i `SHA256SUMS`. Obre un terminal dins de la carpeta i executa:
 
