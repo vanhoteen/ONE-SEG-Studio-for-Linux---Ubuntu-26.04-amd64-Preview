@@ -48,7 +48,7 @@ Vídeo 320×240 a 15 fps; 80, 100, 200 o 300 kb/s; AAC a 48 kb/s. Amplificador d
 
 ## Límites del modelo de pruebas
 
-Interfaz Linux actualmente en castellano. Otras distribuciones y arquitecturas sin verificar. Reproducción finita, sin bucle continuo garantizado. No incluye cámara, capturadora ni gráfica integrada; un mensaje heredado del motor puede mencionar una gráfica que esta interfaz no muestra. Las tablas horarias son una instantánea del momento de preparación. Archivos de trabajo en `~/.local/share/one-seg-studio`.
+Interfaz Linux disponible en castellano e inglés. Otras distribuciones y arquitecturas sin verificar. Reproducción finita, sin bucle continuo garantizado. No incluye cámara, capturadora ni gráfica integrada; un mensaje heredado del motor puede mencionar una gráfica que esta interfaz no muestra. Las tablas horarias son una instantánea del momento de preparación. Archivos de trabajo en `~/.local/share/one-seg-studio`.
 
 ## Responsabilidad al emitir
 

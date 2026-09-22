@@ -85,7 +85,7 @@ PY_MIN="$(/usr/bin/python3 -c 'import sys; print(f"{sys.version_info.major}.{sys
 PY_MAX="$(/usr/bin/python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor+1}")')"
 cat > "$STAGE/DEBIAN/control" <<CONTROL
 Package: one-seg-studio
-Version: 0.1.0~linuxpreview2
+Version: 0.1.0~linuxpreview3
 Section: video
 Priority: optional
 Architecture: amd64
@@ -116,7 +116,7 @@ assert str(path) in gnuradio.isdbt.__file__
 print('Staged gr-isdbt imports successfully. No RF.')
 PY
 /usr/bin/python3 "$APP/linux/smoke.py"
-dpkg-deb --root-owner-group --build "$STAGE" "$DIST/one-seg-studio_0.1.0~linuxpreview2_amd64.deb"
+dpkg-deb --root-owner-group --build "$STAGE" "$DIST/one-seg-studio_0.1.0~linuxpreview3_amd64.deb"
 cp "$ROOT/linux/install.sh" "$DIST/INSTALL.sh"
 printf '%s\n' "$VERSION_ID" > "$DIST/UBUNTU_VERSION"
 chmod 755 "$DIST/INSTALL.sh"

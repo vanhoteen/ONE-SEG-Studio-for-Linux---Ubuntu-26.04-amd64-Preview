@@ -23,6 +23,48 @@ GREEN = '#2fc96c'
 LINE = '#dde1e4'
 
 
+TEXT = {
+    'es': {
+        'tested': 'Probado con Sony XDV-D500 · Linux beta', 'connection': 'CONEXIÓN HACKRF',
+        'detect': 'Detectar HackRF', 'content': '  CONTENIDO', 'choose': '▱  Elegir vídeo…',
+        'channel_quality': '  CANAL Y CALIDAD', 'video_bitrate': 'Bitrate de vídeo',
+        'vga_gain': 'Ganancia VGA', 'rf_amp': 'Amplificador RF', 'output': '  Señal de salida',
+        'graph': 'La gráfica aparecerá al emitir', 'log': 'Registro', 'stop': '■  Detener',
+        'transmit': '▶  Iniciar emisión', 'prepare': '✧  Preparar vídeo', 'tools': 'Comprobar herramientas',
+        'device_unchecked': 'HackRF sin comprobar', 'choose_video': 'Tu próximo canal empieza aquí',
+        'video_profile': 'Archivo de vídeo · perfil One-Seg', 'selected_video': 'Archivo de vídeo seleccionado · perfil One-Seg',
+        'select_video': 'Elige un vídeo para preparar el canal', 'video_selected': 'Vídeo seleccionado · prepara el canal',
+        'checking_tools': 'Comprobando herramientas · sin RF', 'checking_hackrf': 'Comprobando HackRF · sin RF',
+        'device_ready': 'HackRF detectado y listo', 'device_detected': 'HackRF detectado · RF detenida',
+        'preparing': 'Preparando vídeo · RF detenida', 'prepared': 'Canal preparado · RF detenida',
+        'transmitting': 'Emisión activa · consulta el registro', 'stopped': 'Emisión detenida',
+        'completed': 'Operación terminada', 'failed': 'Falló · consulta el registro',
+        'dialog_video': 'Vídeo', 'choose_first': 'Elige primero un archivo de vídeo.',
+        'dialog_prepare': 'Preparar vídeo', 'prepare_first': 'Prepara el vídeo con la configuración actual antes de emitir.',
+        'file_dialog': 'Elegir vídeo', 'japan': 'Japón',
+    },
+    'en': {
+        'tested': 'Tested with Sony XDV-D500 · Linux beta', 'connection': 'HACKRF CONNECTION',
+        'detect': 'Detect HackRF', 'content': '  CONTENT', 'choose': '▱  Choose video…',
+        'channel_quality': '  CHANNEL & QUALITY', 'video_bitrate': 'Video bitrate',
+        'vga_gain': 'VGA gain', 'rf_amp': 'RF amplifier', 'output': '  OUTPUT SIGNAL',
+        'graph': 'The graph will appear during transmission', 'log': 'Log', 'stop': '■  Stop',
+        'transmit': '▶  Start transmission', 'prepare': '✧  Prepare video', 'tools': 'Check tools',
+        'device_unchecked': 'HackRF not checked', 'choose_video': 'Your next channel starts here',
+        'video_profile': 'Video file · One-Seg profile', 'selected_video': 'Video file selected · One-Seg profile',
+        'select_video': 'Choose a video to prepare the channel', 'video_selected': 'Video selected · prepare the channel',
+        'checking_tools': 'Checking tools · RF stopped', 'checking_hackrf': 'Checking HackRF · no RF stream',
+        'device_ready': 'HackRF detected and ready', 'device_detected': 'HackRF detected · RF stopped',
+        'preparing': 'Preparing video · RF stopped', 'prepared': 'Channel prepared · RF stopped',
+        'transmitting': 'Transmission active · see log', 'stopped': 'Transmission stopped',
+        'completed': 'Operation completed', 'failed': 'Failed · see log',
+        'dialog_video': 'Video', 'choose_first': 'Choose a video file first.',
+        'dialog_prepare': 'Prepare video', 'prepare_first': 'Prepare the video with the current settings before transmitting.',
+        'file_dialog': 'Choose video', 'japan': 'Japan',
+    },
+}
+
+
 class Studio:
     def __init__(self, window):
         self.window = window
@@ -35,10 +77,13 @@ class Studio:
         self.rate = tk.StringVar(value='80')
         self.gain = tk.StringVar(value='0')
         self.amp = tk.BooleanVar(value=False)
-        self.device_text = tk.StringVar(value='HackRF sin comprobar')
-        self.status_text = tk.StringVar(value='Elige un vídeo para preparar el canal')
-        self.file_name = tk.StringVar(value='Tu próximo canal empieza aquí')
-        self.file_subtitle = tk.StringVar(value='Archivo de vídeo · perfil One-Seg')
+        self.lang = 'es'
+        self.language_choice = tk.StringVar(value='Español')
+        self.device_detected = False
+        self.device_text = tk.StringVar(value=self.t('device_unchecked'))
+        self.status_text = tk.StringVar(value=self.t('select_video'))
+        self.file_name = tk.StringVar(value=self.t('choose_video'))
+        self.file_subtitle = tk.StringVar(value=self.t('video_profile'))
         self.frequency_text = tk.StringVar()
         self.gain_text = tk.StringVar()
 
@@ -53,6 +98,28 @@ class Studio:
             variable.trace_add('write', self.changed)
         self.changed()
         window.protocol('WM_DELETE_WINDOW', self.close)
+
+
+    def t(self, key):
+        return TEXT[self.lang][key]
+
+    def change_language(self, _event=None):
+        if self.process:
+            self.language_choice.set('English' if self.lang == 'en' else 'Español')
+            return
+        self.lang = 'en' if self.language_choice.get() == 'English' else 'es'
+        self.device_text.set(self.t('device_ready') if self.device_detected else self.t('device_unchecked'))
+        if self.file.get():
+            self.file_name.set(Path(self.file.get()).name)
+            self.file_subtitle.set(self.t('selected_video'))
+        else:
+            self.file_name.set(self.t('choose_video'))
+            self.file_subtitle.set(self.t('video_profile'))
+        self.status_text.set(self.t('prepared') if self.prepared else self.t('select_video'))
+        for child in self.window.winfo_children():
+            child.destroy()
+        self.build()
+        self.changed()
 
     def configure_style(self):
         style = ttk.Style(self.window)
@@ -103,7 +170,11 @@ class Studio:
         right = tk.Frame(header, bg=PAPER)
         right.pack(side='right')
         self.label(right, 'ワンセグ', size=15, weight='bold', fg=NAVY).pack(anchor='e')
-        self.label(right, 'Probado con Sony XDV-D500 · Linux beta', size=10, fg=MUTED).pack(anchor='e')
+        self.label(right, self.t('tested'), size=10, fg=MUTED).pack(anchor='e')
+        language_box = ttk.Combobox(right, textvariable=self.language_choice, values=('Español', 'English'),
+                                    state='readonly', width=10, justify='center')
+        language_box.pack(anchor='e', pady=(8, 0))
+        language_box.bind('<<ComboboxSelected>>', self.change_language)
         tk.Frame(self.window, bg=RED, height=4).pack(fill='x')
 
         body = tk.Frame(self.window, bg=PAPER, padx=38, pady=22)
@@ -114,11 +185,11 @@ class Studio:
         self.label(connection, '⌁', size=25, weight='bold', fg=NAVY).pack(side='left', padx=(0, 12))
         conn_info = tk.Frame(connection, bg=CARD)
         conn_info.pack(side='left', fill='x', expand=True)
-        self.label(conn_info, 'CONEXIÓN HACKRF', size=10, weight='bold', fg=NAVY).pack(anchor='w')
+        self.label(conn_info, self.t('connection'), size=10, weight='bold', fg=NAVY).pack(anchor='w')
         self.label(conn_info, textvariable=self.device_text, size=13, fg=INK).pack(anchor='w')
         self.device_dot = tk.Label(connection, text='●', bg=CARD, fg='#9ca1a7', font=('TkDefaultFont', 14))
         self.device_dot.pack(side='right', padx=10)
-        self.detect_button = ttk.Button(connection, text='Detectar HackRF', style='Dark.TButton', command=self.detect)
+        self.detect_button = ttk.Button(connection, text=self.t('detect'), style='Dark.TButton', command=self.detect)
         self.detect_button.pack(side='right')
 
         columns = tk.Frame(body, bg=PAPER)
@@ -129,7 +200,7 @@ class Studio:
         left = tk.Frame(columns, bg=PAPER)
         left.grid(row=0, column=0, sticky='nsew', padx=(0, 12))
         self.label(left, '01', size=10, weight='bold', fg=RED).pack(anchor='w', side='left')
-        self.label(left, '  CONTENIDO', size=10, weight='bold', fg=NAVY).pack(anchor='w')
+        self.label(left, self.t('content'), size=10, weight='bold', fg=NAVY).pack(anchor='w')
         preview = tk.Frame(left, bg=NAVY, height=205)
         preview.pack(fill='x', pady=(10, 12))
         preview.pack_propagate(False)
@@ -138,7 +209,7 @@ class Studio:
                  font=('TkDefaultFont', 14, 'bold')).pack()
         tk.Label(preview, textvariable=self.file_subtitle, bg=NAVY, fg='#a8b2bd',
                  font=('TkDefaultFont', 10, 'bold')).pack(pady=(7, 0))
-        ttk.Button(left, text='▱  Elegir vídeo…', style='Soft.TButton', command=self.choose).pack(fill='x')
+        ttk.Button(left, text=self.t('choose'), style='Soft.TButton', command=self.choose).pack(fill='x')
         chips = tk.Frame(left, bg=PAPER, pady=14)
         chips.pack(anchor='w')
         for value in ('320 × 240', '15 FPS', 'AAC 48k'):
@@ -151,14 +222,14 @@ class Studio:
         heading = tk.Frame(right, bg=CARD)
         heading.pack(fill='x')
         self.label(heading, '02', size=10, weight='bold', fg=RED).pack(side='left')
-        self.label(heading, '  CANAL Y CALIDAD', size=10, weight='bold', fg=NAVY).pack(side='left')
+        self.label(heading, self.t('channel_quality'), size=10, weight='bold', fg=NAVY).pack(side='left')
         channel_box = ttk.Spinbox(heading, from_=13, to=62, textvariable=self.channel, width=4,
                                   font=('TkFixedFont', 22, 'bold'), justify='center')
         channel_box.pack(side='right')
         self.label(right, 'CH', size=27, weight='bold', fg=NAVY).pack(anchor='w', pady=(16, 0))
         self.label(right, textvariable=self.frequency_text, size=11, fg=MUTED).pack(anchor='w', pady=(2, 13))
         tk.Frame(right, bg=LINE, height=1).pack(fill='x', pady=(0, 16))
-        self.label(right, 'Bitrate de vídeo', size=11, weight='bold').pack(anchor='w')
+        self.label(right, self.t('video_bitrate'), size=11, weight='bold').pack(anchor='w')
         rate_bar = tk.Frame(right, bg=CARD, pady=9)
         rate_bar.pack(anchor='w')
         for value in ('80', '100', '200', '300'):
@@ -166,20 +237,20 @@ class Studio:
                             style='Rate.TRadiobutton').pack(side='left', padx=(0, 2))
         gain_head = tk.Frame(right, bg=CARD)
         gain_head.pack(fill='x', pady=(8, 0))
-        self.label(gain_head, 'Ganancia VGA', size=11, weight='bold').pack(side='left')
+        self.label(gain_head, self.t('vga_gain'), size=11, weight='bold').pack(side='left')
         self.label(gain_head, textvariable=self.gain_text, size=11, weight='bold', fg=NAVY).pack(side='right')
         tk.Scale(right, from_=0, to=47, orient='horizontal', variable=self.gain, showvalue=False,
                  bg=CARD, fg=RED, activebackground=RED, highlightthickness=0, troughcolor='#dedfdd',
                  sliderrelief='flat').pack(fill='x', pady=(0, 10))
         amp_row = tk.Frame(right, bg=CARD)
         amp_row.pack(fill='x')
-        self.label(amp_row, 'Amplificador RF', size=11, weight='bold').pack(side='left')
+        self.label(amp_row, self.t('rf_amp'), size=11, weight='bold').pack(side='left')
         ttk.Checkbutton(amp_row, variable=self.amp).pack(side='right')
 
         signal_head = tk.Frame(body, bg=PAPER, pady=18)
         signal_head.pack(fill='x')
         self.label(signal_head, '⌁', size=16, weight='bold', fg=NAVY).pack(side='left')
-        self.label(signal_head, '  Señal de salida', size=11, weight='bold', fg=NAVY).pack(side='left')
+        self.label(signal_head, self.t('output'), size=11, weight='bold', fg=NAVY).pack(side='left')
         self.label(signal_head, 'I/Q', size=9, weight='bold', fg=RED).pack(side='right')
         graph = tk.Canvas(body, height=105, bg=NAVY, highlightthickness=0)
         graph.pack(fill='x')
@@ -189,7 +260,7 @@ class Studio:
         log_frame.pack(fill='both', expand=True, pady=(17, 0))
         log_top = tk.Frame(log_frame, bg=CARD)
         log_top.pack(fill='x')
-        self.label(log_top, 'Registro', size=10, weight='bold', fg=NAVY).pack(side='left')
+        self.label(log_top, self.t('log'), size=10, weight='bold', fg=NAVY).pack(side='left')
         self.log = tk.Text(log_frame, height=6, state='disabled', wrap='word', borderwidth=0,
                            bg='#fbfbfa', fg=INK, font=('TkFixedFont', 9))
         self.log.pack(fill='both', expand=True, pady=(6, 0))
@@ -199,13 +270,13 @@ class Studio:
         self.status_dot = tk.Label(footer, text='●', bg=CARD, fg='#9ca1a7', font=('TkDefaultFont', 13))
         self.status_dot.pack(side='left')
         self.label(footer, textvariable=self.status_text, size=11, weight='bold').pack(side='left', padx=(9, 24))
-        self.stop_button = ttk.Button(footer, text='■  Detener', style='Soft.TButton', command=self.stop)
+        self.stop_button = ttk.Button(footer, text=self.t('stop'), style='Soft.TButton', command=self.stop)
         self.stop_button.pack(side='right')
-        self.transmit_button = ttk.Button(footer, text='▶  Iniciar emisión', style='Primary.TButton', command=self.transmit)
+        self.transmit_button = ttk.Button(footer, text=self.t('transmit'), style='Primary.TButton', command=self.transmit)
         self.transmit_button.pack(side='right', padx=(10, 0))
-        self.prepare_button = ttk.Button(footer, text='✧  Preparar vídeo', style='Soft.TButton', command=self.prepare)
+        self.prepare_button = ttk.Button(footer, text=self.t('prepare'), style='Soft.TButton', command=self.prepare)
         self.prepare_button.pack(side='right', padx=(0, 10))
-        self.tools_button = ttk.Button(footer, text='Comprobar herramientas', style='Soft.TButton', command=self.check)
+        self.tools_button = ttk.Button(footer, text=self.t('tools'), style='Soft.TButton', command=self.check)
         self.tools_button.pack(side='right', padx=(0, 10))
         self.actions = [self.detect_button, self.tools_button, self.prepare_button, self.transmit_button]
 
@@ -215,7 +286,7 @@ class Studio:
         width, height = event.width, event.height
         for y in range(16, height, 25):
             canvas.create_line(16, y, width - 16, y, fill='#31495e')
-        canvas.create_text(width // 2, height // 2, text='La gráfica aparecerá al emitir', fill='#a8b2bd',
+        canvas.create_text(width // 2, height // 2, text=self.t('graph'), fill='#a8b2bd',
                            font=('TkDefaultFont', 10, 'bold'))
 
     def snapshot(self):
@@ -231,18 +302,18 @@ class Studio:
         except ValueError:
             channel = 20
         frequency = (473142857.142857 + (channel - 13) * 6000000) / 1e6
-        self.frequency_text.set(f'{frequency:.6f} MHz  ·  Japón')
+        self.frequency_text.set(f"{frequency:.6f} MHz  ·  {self.t('japan')}")
         self.gain_text.set(f'{self.gain.get()} dB')
 
     def choose(self):
         if self.process:
             return
-        name = filedialog.askopenfilename(title='Elegir vídeo')
+        name = filedialog.askopenfilename(title=self.t('file_dialog'))
         if name:
             self.file.set(name)
             self.file_name.set(Path(name).name)
-            self.file_subtitle.set('Archivo de vídeo seleccionado · perfil One-Seg')
-            self.status_text.set('Vídeo seleccionado · prepara el canal')
+            self.file_subtitle.set(self.t('selected_video'))
+            self.status_text.set(self.t('video_selected'))
 
     def append(self, text):
         self.log.config(state='normal')
@@ -289,44 +360,45 @@ class Studio:
         for button in self.actions:
             button.config(state='normal')
         if self.cancelled:
-            self.set_status('Emisión detenida', '#9ca1a7')
+            self.set_status(self.t('stopped'), '#9ca1a7')
         elif result == 0:
-            self.set_status('Operación terminada', GREEN)
+            self.set_status(self.t('completed'), GREEN)
         else:
-            self.set_status('Falló · consulta el registro', RED)
+            self.set_status(self.t('failed'), RED)
         if result == 0 and not self.cancelled and self.completed:
             self.completed()
         if self.closing:
             self.window.destroy()
 
     def check(self):
-        self.run([sys.executable, str(ROOT / 'linux/check.py')], 'Comprobando herramientas · sin RF')
+        self.run([sys.executable, str(ROOT / 'linux/check.py')], self.t('checking_tools'))
 
     def detect(self):
         def done():
-            self.device_text.set('HackRF detectado y listo')
+            self.device_detected = True
+            self.device_text.set(self.t('device_ready'))
             self.device_dot.config(fg=GREEN)
-            self.set_status('HackRF detectado · RF detenida', GREEN)
-        self.run(['SoapySDRUtil', '--probe=driver=hackrf'], 'Comprobando HackRF · sin RF', done)
+            self.set_status(self.t('device_detected'), GREEN)
+        self.run(['SoapySDRUtil', '--probe=driver=hackrf'], self.t('checking_hackrf'), done)
 
     def prepare(self):
         snapshot = self.snapshot()
         self.prepared = None
         if snapshot[-1] is None:
-            messagebox.showerror('Vídeo', 'Elige primero un archivo de vídeo.')
+            messagebox.showerror(self.t('dialog_video'), self.t('choose_first'))
             return
         def done():
             if snapshot == self.snapshot():
                 self.prepared = snapshot
-                self.set_status('Canal preparado · RF detenida', GREEN)
+                self.set_status(self.t('prepared'), GREEN)
         self.run([sys.executable, str(ROOT / 'prepare.py'), snapshot[0], snapshot[1],
-                  snapshot[3], snapshot[2], str(int(snapshot[4]))], 'Preparando vídeo · RF detenida', done)
+                  snapshot[3], snapshot[2], str(int(snapshot[4]))], self.t('preparing'), done)
 
     def transmit(self):
         if self.prepared is None or self.prepared != self.snapshot():
-            messagebox.showerror('Preparar vídeo', 'Prepara el vídeo con la configuración actual antes de emitir.')
+            messagebox.showerror(self.t('dialog_prepare'), self.t('prepare_first'))
             return
-        self.run([sys.executable, str(ROOT / 'signal_tx.py'), str(DATA / 'outputs')], 'Emisión activa · consulta el registro')
+        self.run([sys.executable, str(ROOT / 'signal_tx.py'), str(DATA / 'outputs')], self.t('transmitting'))
 
     def stop(self):
         if not self.process:
